@@ -39,7 +39,7 @@ pipeline
 			steps
 			{
 				
-				script { synopsys.detect { configFile = './BlackDuck/blackduck.config' } }
+				script { synopsys.detect { configFile = '.node-express-realworld-example-app/BlackDuck/blackduck.config' } }
 			}
 		}
 //		stage('Clean up')
