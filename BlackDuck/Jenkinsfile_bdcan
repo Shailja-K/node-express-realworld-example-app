@@ -39,8 +39,6 @@ pipeline
 			steps
 			{
 				
-				
-				sh "echo Using scan-jenkinsfiles/bdcli/blackduck.config && cat scan-jenkinsfiles/bdcli/blackduck.config"
 				script { synopsys.detect { configFile = './BlackDuck/blackduck.config' } }
 			}
 		}
