@@ -15,10 +15,10 @@ pipeline
 				// check out the repo that contains this JenkinsFile, because that's
 				// where the blackduck.config file lives
 				checkout([$class: 'GitSCM',
-				          branches: [[name: "master"]],
-				                    extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'scan-jenkinsfiles']],
-				                    userRemoteConfigs: [[credentialsId: 'SKumari_Jenkins',
-									url: 'https://bitbucket.analog.com/scm/ospo/scan-jenkinsfiles.git']]])
+				          branches: [[name: "test_scan"]],
+				                    extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'node-express-realworld-example-app']],
+				                    userRemoteConfigs: [[credentialsId: '49c2287f-0e94-45af-9292-93f973613961',
+									url: 'https://github.com/Shailja-K/node-express-realworld-example-app.git']]])
 
 				// Check out the sources we want to scan
 				checkout([$class: 'GitSCM',
@@ -30,21 +30,18 @@ pipeline
 				                          shallow: true, trackingSubmodules: false],
 				                       [$class: 'CloneOption', noTags: false, reference: '', shallow: true],
 				                       [$class: 'PruneStaleBranch']],
-										userRemoteConfigs: [[credentialsId: 'SKumari_Jenkins',
-				                            url: 'https://bitbucket.analog.com/scm/dte-inf/bd-cli.git']]])
+										userRemoteConfigs: [[credentialsId: '49c2287f-0e94-45af-9292-93f973613961',
+				                            url: 'https://github.com/Shailja-K/node-express-realworld-example-app.git']]])
 			}
 		}
 		stage('Black Duck')
 		{
 			steps
 			{
-				sh "/opt/osposcan/Python-3.8.3/python -m venv .venv"
-				sh ".venv/bin/pip3 install --upgrade pip"
-				sh "ls -a"
-				sh ".venv/bin/pip3 install -r requirements.txt"
+				
 				
 				sh "echo Using scan-jenkinsfiles/bdcli/blackduck.config && cat scan-jenkinsfiles/bdcli/blackduck.config"
-				script { synopsys.detect { configFile = 'scan-jenkinsfiles/bdcli/blackduck.config' } }
+				script { synopsys.detect { configFile = 'node-express-realworld-example-app\BlackDuck\blackduck.config' } }
 			}
 		}
 //		stage('Clean up')
