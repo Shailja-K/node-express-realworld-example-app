@@ -41,7 +41,7 @@ pipeline
 				
 				
 				sh "echo Using scan-jenkinsfiles/bdcli/blackduck.config && cat scan-jenkinsfiles/bdcli/blackduck.config"
-				script { synopsys.detect { configFile = 'node-express-realworld-example-app\BlackDuck\blackduck.config' } }
+				script { synopsys.detect { configFile = 'node-express-realworld-example-app/BlackDuck/blackduck.config' } }
 			}
 		}
 //		stage('Clean up')
